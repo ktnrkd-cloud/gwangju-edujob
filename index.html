@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>광주·전남 기간제 인력풀 채용공고</title>
+<style>
+  :root {
+    --ink: #1c1c1e;
+    --sub: #6b6b70;
+    --line: #e6e6ea;
+    --accent: #2f5fd6;
+    --music: #b5451b;
+    --bg-card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Pretendard", "Noto Sans KR", sans-serif;
+    background: #f6f6f8;
+    color: var(--ink);
+  }
+  header {
+    padding: 28px 20px 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  .desc { color: var(--sub); font-size: 14px; line-height: 1.5; }
+  .updated { color: var(--sub); font-size: 12px; margin-top: 8px; }
+  main { max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
+  .tabs { display: flex; gap: 8px; margin: 18px 0 14px; }
+  .tab {
+    padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line);
+    background: #fff; font-size: 14px; cursor: pointer; color: var(--sub);
+  }
+  .tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+  }
+  .card.music { border-color: var(--music); background: #fff8f4; }
+  .row1 { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .subject { font-weight: 700; font-size: 16px; }
+  .subject.music::before { content: "🎵 "; }
+  .status { font-size: 12px; color: var(--sub); white-space: nowrap; }
+  .school { color: var(--ink); margin-top: 4px; font-size: 14px; }
+  .meta { color: var(--sub); font-size: 12px; margin-top: 6px; }
+  a.link { color: var(--accent); text-decoration: none; font-size: 13px; }
+  a.link:hover { text-decoration: underline; }
+  section.jeonnam { margin-top: 30px; }
+  section.jeonnam h2 { font-size: 16px; }
+  ul.board-links { padding-left: 18px; font-size: 14px; line-height: 1.9; }
+  .empty { color: var(--sub); font-size: 14px; padding: 20px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>광주·전남 기간제 인력풀 채용공고</h1>
+  <div class="desc">
+    광주는 <b>giganje.gen.go.kr</b> 공고를 자동으로 모아 보여줍니다 (음악 과목은 강조 표시).
+    지원 전 반드시 원문 공고에서 마감일과 제출서류를 확인하세요.
+  </div>
+  <div class="updated" id="updated"></div>
+</header>
+<main>
+  <div class="tabs">
+    <div class="tab active" data-filter="all">전체</div>
+    <div class="tab" data-filter="music">음악만</div>
+  </div>
+  <div id="list"></div>
+
+  <section class="jeonnam">
+    <h2>전남 — 바로가기 (자동 수집 대상 아님, 직접 확인)</h2>
+    <ul class="board-links">
+      <li><a class="link" href="https://www.jne.go.kr/main/na/ntt/selectNttList.do?mi=265&bbsId=117" target="_blank">전라남도교육청 채용정보 게시판</a></li>
+      <li><a class="link" href="https://www.jne.go.kr/main/na/ntt/selectNttList.do?mi=267&bbsId=326" target="_blank">전라남도교육청 기간제교사 인력풀 안내</a></li>
+    </ul>
+  </section>
+</main>
+
+<script>
+async function load() {
+  const res = await fetch('data/postings.json', { cache: 'no-store' });
+  const data = await res.json();
+  document.getElementById('updated').textContent = '마지막 갱신: ' + (data.updated_at || '-');
+
+  let current = 'all';
+  const listEl = document.getElementById('list');
+
+  function render() {
+    const postings = data.postings || [];
+    const filtered = current === 'music'
+      ? postings.filter(p => p.subject && p.subject.includes('음악'))
+      : postings;
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = '<div class="empty">표시할 공고가 없습니다.</div>';
+      return;
+    }
+
+    listEl.innerHTML = filtered.map(p => {
+      const isMusic = p.subject && p.subject.includes('음악');
+      return `
+        <div class="card ${isMusic ? 'music' : ''}">
+          <div class="row1">
+            <div class="subject ${isMusic ? 'music' : ''}">${p.subject || ''}</div>
+            <div class="status">${p.status || ''}</div>
+          </div>
+          <div class="school">${p.school || ''}</div>
+          <div class="meta">
+            [${p.board || ''}] 접수마감: ${p.deadline || '-'}
+            ${p.link ? ` · <a class="link" href="${p.link}" target="_blank">원문 공고</a>` : ''}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      current = tab.dataset.filter;
+      render();
+    });
+  });
+
+  render();
+}
+load().catch(err => {
+  document.getElementById('list').innerHTML =
+    '<div class="empty">데이터를 불러오지 못했습니다. (아직 크롤러가 한 번도 실행되지 않았을 수 있습니다)</div>';
+  console.error(err);
+});
+</script>
+</body>
+</html>
