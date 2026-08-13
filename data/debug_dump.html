@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="전남광주통합특별시 교육청(광주) 기간제인력풀 시스템" name="description"/>
+<meta content="전남광주통합특별시 교육청(광주) 기간제인력풀 시스템" name="keywords"/>
+<meta content="" name="google-site-verification"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<!-- meta http-equiv="X-Frame-Options" content="deny" / -->
+<link href="/site/script/gwangju.ico" rel="shortcut icon"/>
+<title>
+전남광주통합특별시 교육청(광주) 기간제인력풀 시스템</title>
+<link href="/site/script/button.css?t=1786585735" rel="stylesheet" type="text/css"/>
+<link href="/site/script/style.css?t=1786585735" rel="stylesheet" type="text/css"/>
+<link href="/site/template05/style/common.css?t=1786585735" rel="stylesheet" type="text/css"/>
+<link href="/site/template05/style/main.css?t=1786585735" rel="stylesheet" type="text/css"/>
+<link href="/site/template05/style/sub5.css?t=1786585735" rel="stylesheet" type="text/css"/>
+<link href="/site/script/style_form.css?t=1786585735" rel="stylesheet" type="text/css"/>
+<!-- <link href="/site/template05/css/jquery-ui.css" rel="stylesheet" type="text/css"> -->
+<link href="/site/script/jqr/1.12.1/jquery-ui.css?t=1786585735" rel="stylesheet" type="text/css"/>
+<!-- <script type="text/javascript" language="JavaScript" src="/site/script/jquery-1.8.3.js"></script> -->
+<script language="JavaScript" src="/site/script/jqr/jquery-3.5.1.js?t=1786585735" type="text/javascript"></script>
+<!-- <script type="text/javascript" language="JavaScript" src="/site/script/jquery-ui-1.9.2.custom.js"></script> -->
+<script language="JavaScript" src="/site/script/jqr/1.12.1/jquery-ui.min.js?t=1786585735" type="text/javascript"></script>
+<!-- <script type="text/javascript" language="JavaScript" src="/site/template02/js/jquery-ui-1.10.3.min.js"></script> -->
+<!-- <link href="/site/template02/js/1.12.1/jquery-ui.css" rel="stylesheet" type="text/css"> -->
+<!-- <script type="text/javascript" language="JavaScript" src="/site/template02/js/1.12.1/jquery-ui.min.js"></script> -->
+<script language="JavaScript" src="/site/script/common.js?t=1786585735" type="text/javascript"></script>
+<script language="JavaScript" src="/site/script/default.js?t=1786585735" type="text/javascript"></script>
+<script language="JavaScript" src="/site/script/formchk.js?t=1786585735" type="text/javascript"></script>
+<script language="JavaScript" src="/site/script/ark-common.js?t=1786585735" type="text/javascript"></script>
+<script language="JavaScript" src="/site/script/objoption.js?t=1786585735" type="text/javascript"></script>
+<script charset="utf-8" language="JavaScript" src="/site/script/boxover.js?t=1786585735" type="text/javascript"></script>
+<script charset="utf-8" language="JavaScript" src="/site/script/json2.js?t=1786585735" type="text/javascript"></script>
+<script charset="utf-8" language="JavaScript" src="/site/script/ajax.js?t=1786585735" type="text/javascript"></script>
+<script language="JavaScript" src="/site/script/calendar.js?t=1786585735" type="text/javascript"></script>
+<!-- link href="/site/template02/css/datepicker3.css" rel="stylesheet" / -->
+<link href="/site/template02/css/jquery.datetimepicker.min.css?t=1786585735" rel="stylesheet"/>
+<!-- script type="text/javascript" src="/site/template02/js/bootstrap-datepicker.js"></script -->
+<script charset="UTF-8" src="/site/template02/js/bootstrap-datepicker.kr.js?t=1786585735" type="text/javascript"></script>
+<script charset="UTF-8" src="/site/template02/js/jquery.ui.monthpicker.js?t=1786585735" type="text/javascript"></script>
+<script charset="UTF-8" src="/site/template02/js/jquery.datetimepicker.full.min.js?t=1786585735" type="text/javascript"></script>
+<script language="JavaScript">
+Date.prototype.setYmd = function(val){
+	if(val.length > 3) this.setFullYear(val.substring(0,4));
+	if(val.length > 5) this.setMonth((val.substring(4,6)*1)-1);
+	if(val.length > 7) this.setDate(val.substring(6,8));
+	if(val.length > 9) this.setHours(val.substring(8,10));
+	if(val.length > 11) this.setMinutes(val.substring(10,12));
+	if(val.length > 13) this.setSeconds(val.substring(12,14));
+};
+Date.prototype.getYmd = function(){
+	var result = this.getFullYear()+'';
+	if(this.getMonth() < 9) result+='0'+(this.getMonth()+1);
+	else result+=(this.getMonth()+1)+'';
+	if(this.getDate() < 10) result+='0'+this.getDate();
+	else result +=this.getDate()+'';
+	return result;
+};
+
+Date.prototype.getTimes = function(){
+	var result = (this.getHours() < 10) ? '0'+this.getHours(): this.getHours()+'';
+	if(this.getMinutes() < 10) result+='0'+(this.getMinutes());
+	else result+=(this.getMinutes())+'';
+	if(this.getSeconds() < 10) result+='0'+this.getSeconds();
+	else result +=this.getSeconds()+'';
+	return result;
+};
+Date.prototype.getYmdHis = function(){
+	return this.getYmd()+this.getTimes();
+};
+
+
+Date.prototype.getBarDay = function(){
+	var result = this.getFullYear()+'-';
+	if(this.getMonth() < 9) result+='0'+(this.getMonth()+1)+'-';
+	else result+=(this.getMonth()+1)+'-';
+	if(this.getDate() < 10) result+='0'+this.getDate();
+	else result +=this.getDate()+'';
+	return result;
+};
+
+Date.prototype.getBarTime = function(){
+	var result = (this.getHours() < 10) ? '0'+this.getHours(): this.getHours()+':';
+	if(this.getMinutes() < 10) result+='0'+(this.getMinutes())+':';
+	else result+=(this.getMinutes())+':';
+	if(this.getSeconds() < 10) result+='0'+this.getSeconds();
+	else result +=this.getSeconds()+'';
+	return result;
+};
+Date.prototype.getBarDayTime = function(){
+	return this.getBarDay()+' '+this.getBarTime();
+};
+</script>
+<link href="/site/template05/main/img5/top5.css?t=1786585735" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="wrap">
+<div class="loginMsg" id="topLoginMsgDiv">
+</div>
+<header>
+<div class="logo"><a href="/site/index.php" title="기간제 홈">
+<div class="markimage">  </div></a>
+<!-- <div class="mark">중등</div> -->
+<div>
+<a href="/site/index.php?siteNo=05" title="중등기간제 홈">
+<div style="font-weight:700">전남광주통합특별시교육청(광주)</div>
+<div style="font-size:12px;color:var(--muted)">중등 기간제교사 인력풀</div>
+</a>
+</div>
+</div>
+<div class="menu-toggle">☰</div>
+<nav>
+<ul id="menu">
+<li>채용공고조회                <ul>
+<li><a href="/site/period/index.php?s_SD_NEWDIV=04&amp;siteNo=05&amp;m_code=in501010&amp;m_sub=in501010">공개 경쟁채용공고</a></li>
+<li><a href="/site/period/index.php?s_SD_NEWDIV=02&amp;siteNo=05&amp;m_code=in501010&amp;m_sub=in501011">인력풀등재자대상 경쟁채용공고</a></li>
+<li><a href="/site/period/index.php?s_SD_NEWDIV=03&amp;siteNo=05&amp;m_code=in501010&amp;m_sub=in501013">인력풀등재자대상 지명경쟁채용계획</a></li>
+<li><a href="/site/period/index.php?s_SD_NEWDIV=05&amp;siteNo=05&amp;m_code=in501010&amp;m_sub=in501014">시간강사채용공고</a></li>
+</ul>
+</li>
+<li class="nextmenu">나의정보관리                <ul>
+</ul>
+</li>
+<li class="nextmenu">알림마당                <ul>
+<li><a href="/site/info/index.php?&amp;siteNo=05&amp;m_code=in507010&amp;m_sub=in507011">인력풀운영안내</a></li>
+<li><a href="/site/showbd/index.php?code=mood_gong&amp;siteNo=05&amp;m_code=in507010&amp;m_sub=in507012">공지사항</a></li>
+</ul>
+</li>
+</ul></nav>
+<div>
+<button class="login-btn" onclick="javascript:window.location.href='/site/login/?siteNo=05&amp;go_url=L3NpdGUvcGVyaW9kL2luZGV4LnBocD9zaXRlTm89MDUmc19TRF9ORVdESVY9MDImbV9jb2RlPWluNTAxMDEwJm1fc3ViPWluNTAxMDEx&amp;part=gigan';return false;">로그인</button>
+<button class="login-btn" onclick="javascript:window.location.href='/site/login/?siteNo=05&amp;go_url=L3NpdGUvcGVyaW9kL2luZGV4LnBocD9zaXRlTm89MDUmc19TRF9ORVdESVY9MDImbV9jb2RlPWluNTAxMDEwJm1fc3ViPWluNTAxMDEx&amp;part=school';return false;">기관로그인</button>
+</div>
+<script language="javascript">var login_user = false;</script>
+</header>
+<main>
+<!-- <div id="container"> -->
+<table>
+<tr>
+<td>
+<div class="leftmenu">
+<!-- <link href="/site/template05/style/common.css" rel="stylesheet" type="text/css">
+<link href="/site/template05/style/main.css" rel="stylesheet" type="text/css">
+<link href="/site/template05/style/sub.css" rel="stylesheet" type="text/css">
+ -->
+<div class="leftmenu_title"><span class="leftmenu_title_text">채용공고조회</span></div>
+<div class="leftmenu_menu">
+<a href="/site/period/index.php?s_SD_NEWDIV=04&amp;m_code=in501010&amp;siteNo=05&amp;m_sub=in501010" title="채용공고를 볼수 있음">공개 경쟁채용공고</a>
+<a href="/site/period/index.php?s_SD_NEWDIV=02&amp;m_code=in501010&amp;siteNo=05&amp;m_sub=in501011" title="채용공고를 볼수 있음"> 인력풀등재자대상<br/> 경쟁채용공고</a>
+<a href="/site/period/index.php?s_SD_NEWDIV=03&amp;m_code=in501010&amp;siteNo=05&amp;m_sub=in501013" title="채용공고를 볼수 있음"> 인력풀등재자대상<br/> 지명경쟁채용계획</a>
+<a href="/site/period/index.php?s_SD_NEWDIV=05&amp;m_code=in501010&amp;siteNo=05&amp;m_sub=in501014" title="채용공고를 볼수 있음">시간강사채용공고</a>
+</div></div>
+<div class="sub_board">
+<div class="nav">
+<span><img src="/site/template05/image/nav_home.png"/></span>
+<ul>
+<li>채용공고조회</li>
+<li class="last">인력풀등재자대상 경쟁채용공고</li>
+</ul>
+</div>
+<div class="subname">
+<span class="subnameLabel">
+		    	인력풀등재자대상 경쟁채용공고	            </span>
+</div>
+<div class="sboard"> <!--  팝업 레이어를 위한 스타일 정의 시작.2015.11.19 김상백 -->
+<link href="/site/script/poplayer.css" rel="stylesheet"/>
+<script language="javascript">
+<!--
+	var okViewSchool = false;
+	function fnButtonClick(p_cmd,key){
+		switch(p_cmd){
+			case '신규':
+				var frm = document.getElementById('listform');
+				frm.pg_mode.value='form_write';
+				frm.submit();
+				break;
+			case '신청':
+				if(!confirm('한번 신청하면 취소 되지 않습니다.  계속 진행 하시겠습니까??')) return ;
+				//alert(getName('SCHOOL_IDX').value);
+				var frm = document.getElementById('write_form');
+				frm.pg_mode.value='form_write';
+				frm.submit();
+				break;
+			case '지원':
+
+									alert('기간제교사 로그인 후 지원가능하며. 인력풀에 등록된 교사만 로그인 가능합니다.');
+								//var frm = document.getElementById('listform');
+				//frm.pg_mode.value='view';
+				//frm.rc_idx.value=key;
+				//frm.submit();
+				break;
+			case '상세보기':
+				//var frm = document.getElementById('listform');
+				//frm.pg_mode.value='view';
+				//frm.rc_idx.value=key;
+				//frm.submit();
+//				getName('viewSchool').src='?pg_mode=view&SCHOOL_IDX='+key;
+//				okViewSchool = true;
+				//showSchool(key);
+//				break;
+
+
+
+				var frm = document.getElementById('listform');
+				frm.pg_mode.value='view';
+				getName('rc_idx').value = key;
+				frm.SCHOOL_IDX.value=key;
+				frm.submit();
+				break;
+
+			case '검색':
+				var frm = document.getElementById('srch_form');
+				getName('start').value=0;
+				frm.submit();
+				break;
+			case '파일저장':
+				var frm = document.getElementById('srch_form');
+				frm.pg_mode.value="excel";
+				frm.submit();
+				frm.pg_mode.value="";
+				break;
+			case '인쇄':
+				var frm = document.getElementById('srch_form');
+				frm.pg_mode.value="print";
+				window.open('','print','width=600,height=700,scrollbars=1,modal=yes');
+				frm.target ='print';
+				frm.submit();
+				frm.target ='';
+				frm.pg_mode.value="";
+				break;
+			case '닫기':
+				$('.layer .bg').click();
+				break;
+		}
+	}
+	/**
+	* 수정,추가용 화명을 띄운다.
+	*/
+	function showEdit(val){
+    	var el='layer';//레이어의 ID값을 적어준다.
+		var temp = $('#' + el);
+		var bg = temp.prev().hasClass('bg');	//dimmed 레이어를 감지하기 위한 boolean 변수
+		if(bg){
+			$('.layer').fadeIn();	//'bg' 클래스가 존재하면 레이어가 나타나고 배경은 dimmed 된다. 
+		}else{
+			temp.fadeIn();
+		}
+		// 화면의 중앙에 레이어를 띄운다.
+//		if (temp.outerHeight() < $(document).height() ) temp.css('margin-top', '-'+temp.outerHeight()/2+'px');
+//		else temp.css('top', '0px');
+		temp.css('top', '100px');
+//		if (temp.outerWidth() < $(document).width() ) temp.css('margin-left', '-'+temp.outerWidth()/2+'px');
+		if (temp.outerWidth() < $(document).width() ) temp.css('margin-left', '-50%');
+		else temp.css('left', '0px');
+		getName('SCHOOL_IDX').value = val;
+		//alert(val);
+		temp.find('a.cbtn').click(function(e){
+			if(bg){
+				$('.layer').fadeOut(); //'bg' 클래스가 존재하면 레이어를 사라지게 한다. 
+			}else{
+				temp.fadeOut();
+			}
+			e.preventDefault();
+			getName('SCHOOL_IDX').value =0;
+			//showGuPopClear();
+		});
+		$('.layer .bg').click(function(e){	//배경을 클릭하면 레이어를 사라지게 하는 이벤트 핸들러
+			$('.layer').fadeOut();
+			e.preventDefault();
+			getName('SCHOOL_IDX').value =0;
+			//resetView();
+		});
+	}
+	/**
+	* 팝업으로 공고내용보여주기
+	**/
+	function showSchool(){
+		if(okViewSchool){
+    	var el='layer2';//레이어의 ID값을 적어준다.
+		var temp = $('#' + el);
+		var bg = temp.prev().hasClass('bg');	//dimmed 레이어를 감지하기 위한 boolean 변수
+		if(bg){
+			$('.layer2').fadeIn();	//'bg' 클래스가 존재하면 레이어가 나타나고 배경은 dimmed 된다. 
+		}else{
+			temp.fadeIn();
+		}
+		// 프레임의 데이터를 채운다.
+		
+
+
+		// 화면의 중앙에 레이어를 띄운다.
+	//	if (temp.outerHeight() < $(document).height() ) temp.css('margin-top', '-'+temp.outerHeight()/2+'px');
+	//	else temp.css('top', '0px');
+		temp.css('top', '100px');
+//		if (temp.outerWidth() < $(document).width() ) temp.css('margin-left', '-'+temp.outerWidth()/2+'px');
+		if (temp.outerWidth() < $(document).width() ) temp.css('margin-left', '-50%');
+		else temp.css('left', '0px');
+		
+		//alert(val);
+		temp.find('a.cbtn').click(function(e){
+			if(bg){
+				$('.layer2').fadeOut(); //'bg' 클래스가 존재하면 레이어를 사라지게 한다. 
+			}else{
+				temp.fadeOut();
+			}
+			e.preventDefault();
+			
+			//showGuPopClear();
+		});
+		$('.layer2 .bg').click(function(e){	//배경을 클릭하면 레이어를 사라지게 하는 이벤트 핸들러
+			$('.layer2').fadeOut();
+			e.preventDefault();
+			
+			//resetView();
+		});
+		}
+	}
+function resizeFrame(name,h){
+	try{
+		//alert('12342');
+		getName(name).style.height = h+"px";
+		//alert(h);
+	}
+	catch(e)
+	{
+	    err_handle(e);
+	}
+}
+
+//-->
+</script>
+<!-- =========================================================== 팝업 레이어 시작===========================================================  -->
+<div class="layer2">
+<div class="bg"></div>
+<div class="pop-layer" id="layer2">
+<div class="pop-container">
+<div class="pop-conts">
+<!--content //-->
+<iframe frameborder="0" hspace="0" id="viewSchool" name="viewSchool" scrolling="yes" src="" style="width:100%;height:100;overflow-x:hidden;" vspace="0"></iframe>
+<!-- div class="btn-r">
+						<a href="#" class="cbtn">Close</a>
+					</div -->
+<!--// content-->
+</div>
+</div>
+</div>
+</div>
+<!-- =========================================================== 팝업 레이어 끝 ===========================================================  -->
+<!-- =========================================================== 팝업 레이어 시작===========================================================  -->
+<div class="layer">
+<div class="bg"></div>
+<div class="pop-layer" id="layer">
+<div class="pop-container">
+<div class="pop-conts">
+<!--content //-->
+<div id="tableContainer">
+<table border="0" cellpadding="0" cellspacing="0" class="barshows" id="bar_지원창" width="100%"><tr><td align="left" class="barshowtitle" valign="bottom"><span class="titleA1"><span class="titleA2">지원창</span></span></td><td align="left" class="barshowsubtitle">지원 내용을 수정하시려면 기간제등록관리에서 수정하시면 됩니다.</td><td align="right" id="buttonList_지원창" valign="bottom">  <label class="button large blue strong" id="btn_신청" title=""><input onclick="javascript:fnButtonClick('신청',''); return false;" onfocus="blur()" type="button" value="신청"/></label>  <label class="button large blue strong" id="btn_닫기" title=""><input onclick="javascript:fnButtonClick('닫기',''); return false;" onfocus="blur()" type="button" value="닫기"/></label></td></tr></table> <table border="0" cellpadding="0" cellspacing="0" class="bar" width="100%">
+<form id="write_form" method="post" name="write_form" target="join_target">
+<input name="pg_mode" type="hidden" value=""/>
+<input id="SCHOOL_IDX" name="SCHOOL_IDX" type="hidden" value=""/>
+<input name="MAN_IDX" type="hidden" value=""/>
+<tr>
+<th class="head_1h">이름</th>
+<th class="head_1h">성별</th>
+<th class="head_1h">생년월일</th>
+<th class="head_1h">전화번호</th>
+<th class="head_1h">주소</th>
+</tr>
+<tr>
+<td class="cell_c"></td>
+<td class="cell_c"></td>
+<td class="cell_c"></td>
+<td class="cell_c"></td>
+<td class="cell_l"></td>
+</tr>
+<tr>
+<th class="head_1h">과목</th>
+<th class="head_1h">자격</th>
+<th class="head_1h">등재구분</th>
+<th class="head_1h">연수</th>
+<th class="head_1h">신원조회</th>
+</tr>
+<tr>
+<td class="cell_c"></td>
+<td class="cell_c"></td>
+<td class="cell_c"></td>
+<td class="cell_c"></td>
+<td class="cell_c"></td>
+</tr>
+<tr>
+<th class="head_1m">기록경력사항</th>
+<td class="cell_l" colspan="4"><pre></pre></td>
+</tr>
+<tr>
+<th class="head_1m">근무희망사항</th>
+<td class="cell_l" colspan="4"><pre></pre></td>
+</tr>
+<tr>
+<th class="head_1m">첨부파일</th>
+<td class="cell_l" colspan="4" id="file_list"></td>
+</tr>
+</form>
+<script language="JavaScript">
+<!--
+//파일 업로드 관련 자바 스크립트
+//파일리스트 가져오기
+var ajax_xml = new sack();
+function get_file_list(code,idx){
+
+			ajax_xml.reset();
+			ajax_xml.setVar("pg_mode",'file_list');
+			ajax_xml.setVar("MAN_IDX",code);
+			ajax_xml.requestFile = "";
+			ajax_xml.method = 'GET';
+//			ajax_xml.element = active_tb+'_list_tables';
+//			ajax_xml.onLoading = whenInteractive;//whenLoading;
+//			ajax_xml.onLoaded = whenLoaded; 
+//			ajax_xml.onInteractive = whenInteractive;
+			ajax_xml.onCompletion = get_file_Completed;
+			ajax_xml.runAJAX();
+	//errMsg(ajax_xml.URLString);
+}
+function get_file_Completed(){
+		var newdata;
+		var filelisttd ='<table border="0" cellpadding="1" cellspacing="1"><tr><td bgcolor="white"><a href="?pg_mode=download&fidx=__FIDX__" target="_new">__FNAME__</a></td></tr></table>';
+		document.getElementById('file_list').innerHTML='';
+		if (ajax_xml.responseStatus){
+//			document.getElementById('show_ajax').innerHTML=ajax_xml.xmlhttp.responseText;
+			try{newdata = JSON.parse(ajax_xml.xmlhttp.responseText, function (key, value) {var d;if (typeof value === 'string' && value.slice(0, 5) === 'Date(' && value.slice(-1) === ')') { d = new Date(value.slice(5, -1));if (d) { return d;}}return value;});}catch(e){try{newdata = json_parse(request.responseText, function (key, value) { var a;if (typeof value === 'string') {a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);if (a) {return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4], +a[5], +a[6]));}}return value;});}catch(e){}}
+			
+			if(newdata && newdata.length >1){
+				var innerhtmls = '';//'<b>첨부파일 리스트</b><br>';
+				for(i=1;i<(newdata.length);i++){//마지막에는 반드시 총괄정보가 들어온다.
+					innerhtmls += filelisttd.replace(/__FIDX__/g,newdata[i].fidx).replace(/__FNAME__/g,newdata[i].fname).replace(/__FSIZE__/g,newdata[i].fsize).replace(/__DCNT__/g,newdata[i].dcnt);
+				}
+				document.getElementById('file_list').innerHTML = innerhtmls;
+			}
+		} else {
+//document.getElementById('show_ajax').innerHTML=ajax_xml.URLString;
+		}
+}
+get_file_list('');
+
+function delete_file(fidx){
+	document.getElementById('file_target').src='?pg_mode=fdelete&code=0&fidx='+fidx;
+}
+//파일 업로드하기
+
+//-->
+</script>
+</table>
+</div>
+<!-- div class="btn-r">
+						<a href="#" class="cbtn">Close</a>
+					</div-->
+<!--// content-->
+</div>
+</div>
+</div>
+</div>
+<!-- =========================================================== 팝업 레이어 끝 ===========================================================  -->
+<!-- =========================================================== 검색창 시작 ===========================================================  -->
+<div id="tableContainer">
+<div class="basic_search">
+<form id="srch_form" method="get" name="srch_form" onsubmit="return false;">
+<input name="pg_mode" type="hidden" value=""/>
+<input id="start" name="start" type="hidden" value=""/>
+<input name="m_code" type="hidden" value="***86df317526a693f3"/><input name="m_sub" type="hidden" value="***86df317526a693f2"/><input name="m_sub2" type="hidden" value=""/><input name="siteNo" type="hidden" value="05"/><input name="s_SD_SUBJECT" type="hidden" value=""/> <input name="s_mode" type="hidden" value="1"/>
+<input name="SCHOOL_IDX" type="hidden" value=""/>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr valign="middle">
+<td>
+<select class="textarea_kr" name="s_SD_LICEGUBUN" onchange="fnButtonClick('검색');" style="height:28px; width:100px; margin-right:5px; border:1px solid #bfbfbf;"><option value="0">--자격구분 -- </option>
+<option value="K">유치원</option><option value="M">초등</option><option selected="" value="H">중등</option><option value="D">특수</option><option value="E">공통</option></select>
+</td>
+<td>
+<select name="s_SD_STATUS" onchange="fnButtonClick('검색');" style="height:28px; cursor: pointer;">
+<option value="0,1,2">모든진행</option><option selected="" value="0">접수중</option><option value="1">마감</option><option value="2">채용</option> </select>
+</td>
+<td>
+<select name="s_fields" style="height:28px; margin-left:10px; cursor: pointer;">
+<option value="">검색조건</option><option value="SD_SUBJECT">채용구분</option><option value="SCHOOL">학교명</option><option selected="" value="SD_DIVISION">과목분야</option> </select>
+</td>
+<td>
+<input id="s_val" name="s_val" size="40" style="height:22px; margin-left:10px; margin-right:10px;" type="text" value=""/>
+</td>
+<td>
+<label class="button large blue strong" id="btn_검색">
+<input onclick="javascript:fnButtonClick('검색',''); return false;" onfocus="blur()" type="button" value="검색"/>
+</label></td>
+</tr>
+</table>
+</form>
+</div>
+</div>
+<!-- =========================================================== 검색창 끝 ===========================================================  -->
+<div id="tableContainer">
+<div id="tableContainer">
+<ul class="contentsnotice">
+<li>인력풀 미등재자는 학교장전형(일반공개전형)과 시간강사채용 공고에 지원할 수 있습니다.</li>
+<li>채용 지원 희망시 공고문을 클릭 후 [지원] 버튼을 클릭하여 지원할 수 있습니다.</li>
+</ul>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td colspan="2" valign="top">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td height="10"></td>
+</tr>
+<tr>
+<td>
+<!-- 공지사항 테이블 시작 -->
+<!--table width="100%" border="0" cellspacing="0" cellpadding="0" -->
+<table border="0" cellpadding="0" cellspacing="0" class="bar" style="width:100%;">
+<form action="" id="listform" method="get" name="listform">
+<input name="pg_mode" type="hidden" value=""/>
+<input name="start" type="hidden" value=""/>
+<input name="rc_idx" type="hidden"/>
+<input id="SCHOOL_IDX" name="SCHOOL_IDX" type="hidden" value=""/>
+<input name="m_code" type="hidden" value="***86df317526a693f3"/><input name="m_sub" type="hidden" value="***86df317526a693f2"/><input name="m_sub2" type="hidden" value=""/><input name="siteNo" type="hidden" value="05"/><input name="s_SD_SUBJECT" type="hidden" value=""/> <tr>
+<th class="head_1h" height="30px" width="50px">번호</th>
+<th class="head_1h" width="60px">학교급</th>
+<th align="center" class="head_1h" width="80px">과목및분야</th>
+<th align="center" class="head_1h">채용구분</th>
+<th class="head_1h" width="100px">학교명</th>
+<th class="head_1h" width="200px">접수시작<br/>접수마감</th>
+<th class="head_1h" width="120px">채용기간</th>
+<th class="head_1h" width="60px">진행</th>
+</tr>
+<tr>
+<td align="center" colspan="8" height="100">검색된 공고가 없습니다.</td>
+</tr>
+</form>
+<tr>
+<td colspan="8" height="50">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="500">
+<tr>
+<td align="center" class="page_num"><b>1</b></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<!--  테이블의 끝 -->
+</td>
+</tr>
+<!-- tr> 
+					<td>인증 처리되 이용가능한 데이터는 번호가 <font color="red">적색</font>입니다.</td>
+				</tr -->
+</table>
+</td>
+</tr>
+</table>
+</div>
+<div id="set"></div>
+<iframe frameborder="0" height="00" hspace="0" id="join_target" name="join_target" scrolling="no" src="about:blank" vspace="0" width="100%"></iframe>
+<!--작업끝-->
+<script language="JavaScript">
+<!--
+
+function popUpLayer_close(layer_name){
+	if ( document.getElementById(layer_name+'_check').checked ){ 
+		//setCookie( layer_name, "done" , 1 ); 
+	} 
+	document.getElementById(layer_name).style.display='none';
+}
+
+function popUpTmp_show(){
+	var oediter = FCKeditorAPI.GetInstance('contents');
+	popUpLayer('layer_name',document.getElementById('pop_w').value,
+		document.getElementById('pop_x').value,
+		document.getElementById('pop_y').value,
+		oediter.EditorDocument.body.innerHTML);
+
+}
+
+//팝업을 만들어 보여준다.
+function popUpLayer(layer_name,w,x,y,msg){
+	var layers = document.getElementById(layer_name);
+	layers.style.left = x;
+	layers.style.top = y;
+	layers.style.width = w;
+	//layers.style.z-index = z;
+	layers.innerHTML = msg+"<table border=0 cellspacing=0 cellpadding=0 width='100%' style=' background-color:#DFDFDF;'><tr><td align='right'> <input type='checkbox' id='"+layer_name+"_check' value='checkbox' class=input_non onclick=\"popUpLayer_close('"+layer_name+"');\">하루동안 열리지 않음 &nbsp; <a href='javascript:void(0);' onclick=\"popUpLayer_close('"+layer_name+"')\"><font style='font-size:14px;'>⊠</font></a></td></tr></table>";
+	layers.style.display = '';
+}
+
+function popUpMakeLayer(layer_name){
+	document.writeln("<div id='"+layer_name+"' style='position:absolute; left:0px; top:0px; width:0 px; height:0px; z-index:20; display: none;'></div>");
+}
+
+popUpMakeLayer('layer_name');
+
+
+//-->
+</script>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<!-- </div> -->
+</main>
+</div>
+<footer>
+<div class="wrap">
+<table>
+<tbody><tr>
+<td style="text-align:right;padding-right:5px;">
+<div class="logo">
+<div class="markimage">  </div>
+<div>
+<div style="font-weight:700">전남광주통합특별시교육청(광주)</div>
+<div style="font-size:12px;color:var(--muted)">중등 기간제 교사 인력풀</div>
+</div>
+</div>
+</td>
+<td>
+<div id="main_bottom_01">
+<span onclick="javascript:window.open('http://www.gen.go.kr/sub/page.php?page_code=help_10')" style="cursor:pointer;">저작권 정책</span>     |     
+				<span onclick="javascript:window.open('http://www.gen.go.kr/sub/page.php?page_code=help_12')" style="cursor:pointer;">이메일무단수집거부</span>     |      
+				<span onclick="javascript:window.open('http://www.gen.go.kr/sub/page.php?page_code=help_08')" style="cursor:pointer;">개인정보처리방침</span>
+</div>
+<div id="main_bottom_02">
+<span>주소. 전남광주통합특별시(광주) 서구 화운로 93(우61987)   전화. 062-380-4316 </span>
+</div>
+<div id="main_bottom_03">
+<span>ⓒ www.gen.go.kr. All rights reserved.</span>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</footer>
+<script>
+    // (선택) 모바일용 토글이나 추후 기능을 위한 기본 스크립트 자리
+    // 간단한 접근성 보완 스크립트
+    document.documentElement.lang = 'ko';
+    const toggle = document.querySelector('.menu-toggle');
+const menu = document.querySelector('#menu');
+toggle.addEventListener('click', () => {
+    menu.classList.toggle('show');
+});
+
+// 모바일에서 서브메뉴 클릭 시 열기
+document.querySelectorAll('#menu > li').forEach(item => {
+    item.addEventListener('click', () => {
+        if(window.innerWidth <= 768){
+            item.classList.toggle('open');
+        }
+    });
+});
+
+  </script>
+</body>
+<script>
+
+try{
+	Initial();
+}catch(e){}
+</script>
+</html>
