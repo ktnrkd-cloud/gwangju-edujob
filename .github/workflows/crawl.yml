@@ -25,14 +25,6 @@ jobs:
       - name: 크롤링
         run: python scripts/crawl.py
 
-      - name: 음악 신규 공고 이메일 발송
-        continue-on-error: true
-        env:
-          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          ALERT_TO_EMAIL: ${{ secrets.ALERT_TO_EMAIL }}
-        run: python scripts/notify.py
-
       - name: 결과 커밋 (data/postings.json 갱신 → 사이트 반영)
         if: always()
         run: |
